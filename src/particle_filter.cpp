@@ -220,19 +220,11 @@ void ParticleFilter::updateWeights(double sensor_range, double std_landmark[],
 		}
 		particle.weight = weight;
 
-		// weights.push_back(weight);
 		particle = SetAssociations(particle, associations, sense_x, sense_y);
 	}
 	for(int i=0; i<particles.size(); i++) {
 		weights[i] = particles[i].weight;
 	}
-	// // cout<<endl;
-	// double weights_acc = 0.0;
-	// weights_acc = accumulate(weights.begin(), weights.end(), 0.0);
-	// for (int i=0; i < weights.size(); i++) {
-	// 	weights[i] = weights[i]/weights_acc;
-	// }
-	// cout << "updateWeights end" <<endl;
 }
 
 void ParticleFilter::resample() {
@@ -251,12 +243,7 @@ void ParticleFilter::resample() {
 		// cout << " distribution(gen)" << random <<endl;
 		resample_particles.push_back(particles[distribution(gen)]);
 	}
-	cout << "resample start resample_particles.size()" << resample_particles.size() <<endl;
-	for(int i=0; i<resample_particles.size(); i++) {
-		cout << "resample_particles" << resample_particles[i].id << " x " << resample_particles[i].x << " y " << resample_particles[i].y << " weight " << resample_particles[i].weight <<endl;
-	}
 	particles = resample_particles;
-	// cout << "resample end" <<endl;
 }
 
 Particle ParticleFilter::SetAssociations(Particle& particle, const std::vector<int>& associations, 
